@@ -7,9 +7,16 @@ public class ThirdPersonCourierController : MonoBehaviour
     public Transform cameraTransform;
 
     [Header("Movement")]
-    public float walkSpeed = 5f;
-    public float sprintSpeed = 8f;
+    [Tooltip("Metres per second. Keep close to Walk Animation Speed so the feet don't slide.")]
+    public float walkSpeed = 1.35f;
+    [Tooltip("Metres per second. Above ~2.2 m/s the walk cycle can't keep up: add a Run animation first.")]
+    public float sprintSpeed = 2.2f;
     public float rotationSmoothTime = 0.1f;
+
+    [Header("Animation")]
+    public Animator animator;
+    [Tooltip("Ground speed the Walk clip was made for (Blender walk cycle: 1.12 m/s).")]
+    public float walkAnimationSpeed = 1.12f;
 
     [Header("Jumping")]
     public float jumpHeight = 1.5f;
@@ -35,6 +42,7 @@ public class ThirdPersonCourierController : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 inputDirection = new Vector3(horizontal, 0f, vertical).normalized;
+        float currentSpeed = 0f;
 
         if (inputDirection.sqrMagnitude > 0.01f)
         {
@@ -51,6 +59,15 @@ public class ThirdPersonCourierController : MonoBehaviour
             float speed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             characterController.Move(moveDirection.normalized * speed * Time.deltaTime);
+            currentSpeed = speed;
+        }
+
+        if (animator != null)
+        {
+            // Speed switches Idle <-> Walk; MotionSpeed plays the walk faster/slower to match the ground speed
+            animator.SetFloat("Speed", currentSpeed, 0.1f, Time.deltaTime);
+            float playback = currentSpeed > 0.01f ? currentSpeed / walkAnimationSpeed : 1f;
+            animator.SetFloat("MotionSpeed", Mathf.Clamp(playback, 0.5f, 2f));
         }
 
         if (grounded && Input.GetButtonDown("Jump"))

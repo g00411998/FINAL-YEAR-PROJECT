@@ -169,8 +169,12 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.4
   androidMinAspectRatio: 1
+<<<<<<< Updated upstream
   applicationIdentifier:
     Standalone: com.DefaultCompany.ParcelRush
+=======
+  applicationIdentifier: {}
+>>>>>>> Stashed changes
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -300,6 +304,7 @@ PlayerSettings:
   androidSymbolsSizeThreshold: 800
   m_BuildTargetIcons: []
   m_BuildTargetPlatformIcons:
+<<<<<<< Updated upstream
   - m_BuildTarget: iPhone
     m_Icons:
     - m_Textures: []
@@ -397,6 +402,8 @@ PlayerSettings:
       m_Height: 1024
       m_Kind: 4
       m_SubKind: App Store
+=======
+>>>>>>> Stashed changes
   - m_BuildTarget: Android
     m_Icons:
     - m_Textures: []

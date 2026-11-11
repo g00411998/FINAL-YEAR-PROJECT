@@ -1,7 +1,16 @@
 # Local Codex build files
 .codex-finalizer/
 .codex-presentation-build/
+.staging-unity/
 output/
+tmp/
+
+# Blender automatic backup copies (.blend1, .blend2, ...)
+*.blend[0-9]
+*.blend[0-9][0-9]
+
+# Accidental nested copy inside the character folder
+Game/Assets/Characters/ParcelPanicCourier/Game/
 
 # macOS and Windows
 .DS_Store

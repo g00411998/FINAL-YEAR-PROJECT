@@ -1,6 +1,7 @@
 """Step 6 - Export the rigged + animated character to Unity as FBX.
 
-Run:  Blender -b main_character_v011_walk.blend --python export_main_character_fbx.py -- <out.fbx>
+Run:  Blender -b main_character_v012_bag.blend --python export_main_character_fbx.py -- <out.fbx>
+      (v012_bag = v011_walk + the backpack from add_backpack.py)
 
 Same settings as File > Export > FBX with:
   Limit to Selected, Armature + Mesh, Apply Scalings = FBX All, Forward -Z, Up Y,

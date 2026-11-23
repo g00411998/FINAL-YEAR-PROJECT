@@ -4,6 +4,7 @@ using UnityEngine;
 public class PickupPointTrigger : MonoBehaviour
 {
     public TMP_Text currentJobText;
+    public GameObject parcelVisual;
 
     public static bool ParcelPickedUp { get; private set; }
     private bool pickedUp = false;
@@ -11,6 +12,9 @@ public class PickupPointTrigger : MonoBehaviour
     private void Start()
     {
         ParcelPickedUp = false;
+
+        if (parcelVisual != null)
+            parcelVisual.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -21,8 +25,11 @@ public class PickupPointTrigger : MonoBehaviour
         pickedUp = true;
         ParcelPickedUp = true;
 
+        if (parcelVisual != null)
+            parcelVisual.SetActive(true);
+
         if (currentJobText != null)
-            currentJobText.text = "Deliver the parcel to the purple point";
+            currentJobText.text = "CURRENT JOB\nDeliver the parcel to the purple point";
 
         gameObject.SetActive(false);
     }
